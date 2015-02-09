@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 class Task extends \Eloquent {
 
+    protected $table = 'laravel_tasks';
     protected $fillable = [
         'class_name',
         'title',

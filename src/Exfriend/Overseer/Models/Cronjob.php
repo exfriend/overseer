@@ -6,7 +6,7 @@ use Cron\CronExpression;
 
 class Cronjob extends \Eloquent {
 
-    protected $table = 'crontab';
+    protected $table = 'laravel_crontab';
 
     protected $fillable = [
         'active',

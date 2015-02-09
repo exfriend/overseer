@@ -12,7 +12,7 @@ class OviCreateTasksTable extends Migration {
      */
     public function up()
     {
-        Schema::create( 'tasks', function ( Blueprint $table )
+        Schema::create( 'laravel_tasks', function ( Blueprint $table )
         {
             $table->increments( 'id' );
             $table->string( 'title' );
@@ -32,6 +32,6 @@ class OviCreateTasksTable extends Migration {
      */
     public function down()
     {
-        Schema::drop( 'tasks' );
+        Schema::drop( 'laravel_tasks' );
     }
 }

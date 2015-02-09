@@ -12,7 +12,7 @@ class OviCreateCrontabTable extends Migration {
      */
     public function up()
     {
-        Schema::create( 'crontab', function ( Blueprint $table )
+        Schema::create( 'laravel_crontab', function ( Blueprint $table )
         {
             $table->increments( 'id' );
             $table->integer( 'task_id' );
@@ -34,7 +34,7 @@ class OviCreateCrontabTable extends Migration {
      */
     public function down()
     {
-        Schema::drop( 'crontab' );
+        Schema::drop( 'laravel_crontab' );
     }
 
 }
