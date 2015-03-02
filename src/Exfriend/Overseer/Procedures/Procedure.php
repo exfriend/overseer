@@ -16,6 +16,7 @@ use Monolog\Logger;
 abstract class Procedure implements ProcedureInterface {
 
     public $progress = 0;
+    public $console;
     protected $external_log_folder;
     private $taskRepo;
     private $short_log = [ ];
@@ -37,13 +38,14 @@ abstract class Procedure implements ProcedureInterface {
         // unlock
         $this->task->setFinished();
         $this->info->setRunning( false );
+        $this->info( 'Bye!' );
         exit( 0 );
     }
 
     public function setProgress( $percent )
     {
         $this->progress = $percent;
-        $this->info->setProgress( $this->progress );
+        $this->info->setProgress( ceil( $this->progress ) );
     }
 
     public function checkpoint()
@@ -51,27 +53,6 @@ abstract class Procedure implements ProcedureInterface {
         if ( $this->info->getStop() )
         {
             $this->terminate();
-        }
-    }
-
-
-    public function say( $text )
-    {
-        // full log
-        $this->logger->addInfo( $text );
-        // short log
-
-
-
-        $this->short_log [ ] = '[ ' . date( 'd.m H:i:s' ) . ' ] ' . $text;
-
-        $this->short_log = array_slice( $this->short_log, -50 );
-
-        $this->info->setShortLog( $this->short_log );
-
-        if ( $this->console )
-        {
-            $this->console->line( date( '[d.m H:i:s] ' ) . $text );
         }
     }
 
@@ -84,6 +65,51 @@ abstract class Procedure implements ProcedureInterface {
             File::delete( $this->external_log_folder . DIRECTORY_SEPARATOR . $v[ 'filename' ] );
         }
     }
+
+
+    // -------------------------------------------------------------------
+    // --[ helpers ]------------------------------------------------------
+    // -------------------------------------------------------------------
+
+    public function error( $text )
+    {
+        return $this->formattedLine( $text, 'error' );
+    }
+
+    public function info( $text )
+    {
+        return $this->formattedLine( $text, 'info' );
+    }
+
+    public function comment( $text )
+    {
+        return $this->formattedLine( $text, 'comment' );
+    }
+
+    protected function formattedLine( $text, $type )
+    {
+        return $this->say( '<' . $type . '>' . $text . '</' . $type . '>' );
+    }
+
+    public function say( $text )
+    {
+        $this->logger->addInfo( $text );
+        $this->short_log [ ] = '[ ' . date( 'd.m H:i:s' ) . ' ] ' . $text;
+        $this->short_log = array_slice( $this->short_log, -50 );
+
+        $this->info->setShortLog( $this->short_log );
+
+        if ( $this->console )
+        {
+            $this->console->line( date( '[d.m H:i:s] ' ) . $text );
+        }
+    }
+
+
+    // -------------------------------------------------------------------
+    // --[ section ]------------------------------------------------------
+    // -------------------------------------------------------------------
+
 
     protected function initLogger()
     {

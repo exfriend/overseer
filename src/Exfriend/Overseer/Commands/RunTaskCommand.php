@@ -1,6 +1,5 @@
-<?php
+<?php namespace Exfriend\Overseer\Commands;
 
-namespace Exfriend\Overseer\Commands;
 
 use Exfriend\Overseer\Models\Task;
 use Exfriend\Overseer\TaskManager;
@@ -25,12 +24,12 @@ class RunTaskCommand extends Command {
         $manager = new TaskManager( Task::findOrFail( $this->argument( 'task_id' ) ) );
         if ( !( $this->option( 'bg' ) ) )
         {
-            $this->info( 'Running without bg' );
+            //$this->info( 'Running without bg' );
             $manager->run( $this );
         }
         else
         {
-            $this->info( 'Running in bg' );
+            //$this->info( 'Running in bg' );
             $manager->runInBackground();
         }
 

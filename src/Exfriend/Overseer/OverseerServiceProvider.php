@@ -1,5 +1,6 @@
 <?php namespace Exfriend\Overseer;
 
+
 use Illuminate\Support\ServiceProvider;
 
 class OverseerServiceProvider extends ServiceProvider {
