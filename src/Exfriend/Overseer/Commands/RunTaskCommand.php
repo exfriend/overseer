@@ -13,7 +13,6 @@ class RunTaskCommand extends Command {
 
     protected $name = 'task:run';
     protected $description = 'Perform task in background';
-    private $php_path = '/usr/bin/php';
 
 
     public function __construct()
@@ -32,7 +31,6 @@ class RunTaskCommand extends Command {
         else
         {
             $this->info( 'Running in bg' );
-
             $manager->runInBackground();
         }
 
@@ -49,7 +47,7 @@ class RunTaskCommand extends Command {
     protected function getOptions()
     {
         return array(
-            array( 'bg', null, InputOption::VALUE_NONE, 'Ololo' )
+            array( 'bg', null, InputOption::VALUE_NONE, 'Runs the task in background' )
         );
     }
 

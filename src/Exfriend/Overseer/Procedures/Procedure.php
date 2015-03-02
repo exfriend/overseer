@@ -61,6 +61,8 @@ abstract class Procedure implements ProcedureInterface {
         $this->logger->addInfo( $text );
         // short log
 
+
+
         $this->short_log [ ] = '[ ' . date( 'd.m H:i:s' ) . ' ] ' . $text;
 
         $this->short_log = array_slice( $this->short_log, -50 );
