@@ -114,7 +114,10 @@ class FileProcedureInfo implements ProcedureInfoInterface {
         {
             if ( $running )
             {
-                File::makeDirectory( $this->task_folder, 777, true );
+
+                File::makeDirectory( $this->task_folder, 0777, true );
+                chmod( $this->task_folder, 0777 );
+                
                 $this->setProgress( 0 );
                 return true;
             }
