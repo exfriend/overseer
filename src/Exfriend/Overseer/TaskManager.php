@@ -27,8 +27,9 @@ class TaskManager {
         $this->lock();
         $this->task->setRunning();
 
+
         $command = App::make( $this->task->class_name, [ $this->task, $console ] );
-        $command->run();
+        $command->handle();
 
         $this->task->setFinished();
         $this->unlock();
