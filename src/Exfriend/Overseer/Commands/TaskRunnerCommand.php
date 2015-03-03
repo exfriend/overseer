@@ -33,18 +33,16 @@ class TaskRunnerCommand extends Command {
     public function processCronjob( Cronjob $job )
     {
 
-        if ( $this->isTimeToExecute( $job ) )
+        if ( !$this->isTimeToExecute( $job ) )
         {
-            // Run the task in background
-
-            $this->info( 'Running scheduled task "' . $job->task->title . '".' );
-
-            \Artisan::call( 'task:run', [ 'task_id' => $job->task->id ] );
-
-            return true;
+            return false;
         }
 
-        return false;
+
+        // Run the task in background
+        $this->info( 'Running scheduled task "' . $job->task->title . '".' );
+        \Artisan::call( 'task:run', [ 'task_id' => $job->task->id ] );
+        return true;
 
     }
 

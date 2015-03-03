@@ -21,6 +21,10 @@ abstract class Procedure implements ProcedureInterface {
     private $taskRepo;
     private $short_log = [ ];
 
+    // -------------------------------------------------------------------
+    // --[ construct ]----------------------------------------------------
+    // -------------------------------------------------------------------
+
     public function __construct( Task $task, RunTaskCommand $console = null )
     {
         $this->console = $console;
@@ -30,6 +34,24 @@ abstract class Procedure implements ProcedureInterface {
         $this->task = $task;
         $this->info = new FileProcedureInfo( $task );
         $this->taskRepo = new TaskRepo();
+    }
+
+
+    // -------------------------------------------------------------------
+    // --[ methods ]------------------------------------------------------
+    // -------------------------------------------------------------------
+
+    public function handle( $command = false )
+    {
+        try
+        {
+            $this->run( $command );
+        }
+        catch ( \Exception $e )
+        {
+            $this->error( 'Unrecognized error: ' . $e->getMessage() );
+            $this->terminate();
+        }
     }
 
 

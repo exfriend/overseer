@@ -12,7 +12,7 @@ class TaskManager {
 
     public function runInBackground()
     {
-        $command = '/usr/bin/php' . " -q " . base_path() . "/artisan task:run " . $this->task->id . " < /dev/null > script.log &";
+        $command = \Config::get( 'overseer::php_path' ) . " -q " . base_path() . "/artisan task:run " . $this->task->id . " < /dev/null > script.log &";
         shell_exec( $command );
     }
 
@@ -28,7 +28,7 @@ class TaskManager {
         $this->task->setRunning();
 
         $command = App::make( $this->task->class_name, [ $this->task, $console ] );
-        $command->run();
+        $command->handle();
 
         $this->task->setFinished();
         $this->unlock();
