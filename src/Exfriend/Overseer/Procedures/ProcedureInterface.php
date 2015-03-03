@@ -6,7 +6,7 @@ namespace Exfriend\Overseer\Procedures;
 
 interface ProcedureInterface {
 
-    public function run();
+    public function handle();
 
     public function checkpoint();
 
