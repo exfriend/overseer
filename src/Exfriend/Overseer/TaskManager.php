@@ -35,12 +35,10 @@ class TaskManager {
 
     }
 
-
     public function stop()
     {
         $this->info->setStop( true );
     }
-
 
     public function unlock()
     {
