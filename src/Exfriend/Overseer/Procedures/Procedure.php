@@ -41,11 +41,11 @@ abstract class Procedure implements ProcedureInterface {
     // --[ methods ]------------------------------------------------------
     // -------------------------------------------------------------------
 
-    public function handle( $command = false )
+    public function handle()
     {
         try
         {
-            $this->run( $command );
+            $this->run();
         }
         catch ( \Exception $e )
         {
@@ -140,7 +140,6 @@ abstract class Procedure implements ProcedureInterface {
 
         $this->logger->pushHandler( new StreamHandler( $this->info->task_folder . 'log.txt', Logger::INFO ) );
         $this->logger->pushHandler( new StreamHandler( $this->makeLogFilenameForTask(), Logger::INFO ) );
-
 
         $this->logger->addInfo( 'Procedure initialized' );
     }
