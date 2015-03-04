@@ -70,6 +70,8 @@ class OverseerServiceProvider extends ServiceProvider {
 
         include __DIR__ . '/../../helpers.php';
         include __DIR__ . '/../../routes.php';
+        include __DIR__ . '/../../lang/en/messages.php';
+        include __DIR__ . '/../../lang/ru_RU.UTF-8/messages.php';
 
     }
 

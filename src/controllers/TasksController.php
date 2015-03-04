@@ -4,6 +4,7 @@ namespace Exfriend\Overseer;
 use Exfriend\Overseer\Models\Task;
 use Exfriend\Overseer\Models\TaskRepo;
 use Illuminate\Routing\Controller;
+use View;
 
 class TasksController extends Controller {
 
@@ -14,6 +15,18 @@ class TasksController extends Controller {
         $this->taskRepo = $taskRepo;
     }
 
+    protected function setupLayout()
+    {
+        $this->taskRepo = new TaskRepo();
+        $activeTasks = $this->taskRepo->getRunningTasksInfo();
+
+        View::share( 'activeTasks', $activeTasks );
+
+        if ( !is_null( $this->layout ) )
+        {
+            $this->layout = View::make( $this->layout );
+        }
+    }
 
     /*
      * ------------------------------------
@@ -107,13 +120,13 @@ class TasksController extends Controller {
     {
         $path = app_path() . '/storage/logs/tasks/' . $log;
 
-        if ( File::extension( $path ) == 'log' and $log_data = File::get( $path ) )
+        if ( \File::extension( $path ) == 'log' and $log_data = \File::get( $path ) )
         {
             return View::make( 'overseer::tasks.history' )->with( 'log_data', $log_data );
         }
         else
         {
-            return Redirect::route( 'tasks' );
+            return \Redirect::route( 'tasks' );
         }
 
     }

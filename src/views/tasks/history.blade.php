@@ -8,7 +8,7 @@
         }
     </style>
 
-    <h1>Просмотр журнала</h1>
+    <h1>{{ trans('overseer::messages.history_heading') }}</h1>
     <hr>
 
     <div class="panel panel-default">

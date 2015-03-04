@@ -41,21 +41,21 @@
     </h1>
 
 
-    <h3>Управление </h3>
+    <h3>{{ trans('overseer::messages.controls') }} </h3>
     <hr>
 
 
     <button id="btn_start" data-task-id="{{$task->id}}" onclick="task_control({{$task->id}},'start')"
             class="data-btn_start {{ $state['running'] ? 'disabled' : '' }} btn btn-default"><i class="fa fa-play"></i>
-        Запустить
+        {{ trans('overseer::messages.action_run') }}
     </button>
     <button id="btn_stop" data-task-id="{{$task->id}}" onclick="task_control({{$task->id}},'stop')"
             class="data-btn_stop {{ $state['running'] ? '' : 'disabled' }} btn btn-default"><i class="fa fa-stop"></i>
-        Остановить
+        {{ trans('overseer::messages.action_stop') }}
     </button>
     <button id="btn_stop" data-task-id="{{$task->id}}" onclick="task_control({{$task->id}},'unlock')"
             class="data-btn_unlock btn btn-danger"><i class="fa fa-unlock-alt"></i>
-        Unlock
+        {{ trans('overseer::messages.action_unlock') }}
     </button>
 
 
@@ -69,7 +69,7 @@
     </div>
 
 
-    <h3>Журнал</h3>
+    <h3>{{ trans('overseer::messages.log') }}</h3>
     <hr>
 
     <div class="panel panel-default">
@@ -82,27 +82,27 @@
 
 
 
-    <h3>История
-        <small>Предыдущие запуски</small>
+    <h3>
+        <small>{{ trans('overseer::messages.past_runs') }}</small>
     </h3>
     <hr>
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>дата</th>
-            <th>событие</th>
+            <th>{{ trans('overseer::messages.date') }}</th>
+            <th>{{ trans('overseer::messages.event') }}</th>
         </tr>
         </thead>
         <tbody>
         @forelse( $logs as $log )
             <tr>
                 <td>{{ $log['date'] }}</td>
-                <td><a href="{{ url( 'tasks/history/'.$log['filename'] ) }}"> Просмотреть журнал </a></td>
+                <td><a href="{{ url( 'tasks/history/'.$log['filename'] ) }}"> {{ trans('overseer::messages.view_log') }} </a></td>
             </tr>
         @empty
             <tr class="bg-warning">
-                <td colspan="8" style="text-align: center">задание еще не запускалось</td>
+                <td colspan="8" style="text-align: center">{{ trans('overseer::messages.no_runs') }}</td>
             </tr>
         @endforelse
         </tbody>
@@ -112,22 +112,22 @@
     <br>
     <br>
 
-    <h3>Планировщик
-        <small>Запланированные cron-задачи</small>
+    <h3>{{ trans('overseer::messages.scheduler') }}
+        <small>{{ trans('overseer::messages.cronjobs') }}</small>
     </h3>
     <hr>
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>вкл</th>
-            <th>минута</th>
-            <th>час</th>
-            <th>число</th>
-            <th>месяц</th>
-            <th>день недели</th>
-            <th>последний запуск</th>
-            <th>следующий запуск</th>
+            <th>{{ trans('overseer::messages.active') }}</th>
+            <th>{{ trans('overseer::messages.minute') }}</th>
+            <th>{{ trans('overseer::messages.hour') }}</th>
+            <th>{{ trans('overseer::messages.day_of_month') }}</th>
+            <th>{{ trans('overseer::messages.month') }}</th>
+            <th>{{ trans('overseer::messages.day_of_week') }}</th>
+            <th>{{ trans('overseer::messages.last_run') }}</th>
+            <th>{{ trans('overseer::messages.next_run') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -146,7 +146,7 @@
 
         @empty
             <tr class="bg-warning">
-                <td colspan="8" style="text-align: center">нет запланированных запусков</td>
+                <td colspan="8" style="text-align: center">{{ trans('overseer::messages.no_cronjobs') }}</td>
             </tr>
         @endforelse
 
