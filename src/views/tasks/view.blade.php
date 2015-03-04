@@ -82,7 +82,7 @@
 
 
 
-    <h3>
+    <h3>{{ trans('overseer::messages.history') }}
         <small>{{ trans('overseer::messages.past_runs') }}</small>
     </h3>
     <hr>
