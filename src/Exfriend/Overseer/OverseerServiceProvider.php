@@ -67,6 +67,10 @@ class OverseerServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->package( 'exfriend/overseer' );
+
+        include __DIR__ . '/../../helpers.php';
+        include __DIR__ . '/../../routes.php';
+
     }
 
     /**
