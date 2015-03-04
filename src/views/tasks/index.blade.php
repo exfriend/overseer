@@ -38,7 +38,7 @@
 
     </script>
 
-    <h1>{{ trans('overseer::overseer::messages.tasks') }}</h1>
+    <h1>{{ trans('overseer::messages.tasks') }}</h1>
     <hr>
 
     @foreach($tasks as $task)
@@ -70,7 +70,7 @@
                                 onclick="task_control({{$task->id}},'unlock');unlockAlt({{$task->id}})"
                                 class="data-btn_unlock btn btn-link btn-xs">
                             <i class="fa fa-unlock-alt" style="color:maroon"></i>
-                            {{ trans('overseer::overseer::messages.unlock_lc') }}
+                            {{ trans('overseer::messages.unlock_lc') }}
                         </button>
 
 
@@ -83,7 +83,7 @@
                     <span class="help-block">
                    <i class="fa fa-clock-o"></i> <span>{{ strftime('%a %b %d %H:%M', strtotime( $task->last_run ) )  }} </span> <br>
                    <i class="fa fa-clock-o {{ $task->nextRunDate() ? ( ( new DateTime($task->nextRunDate()) < new DateTime('now') ) ? 'text-danger' : 'text-primary' ) : '' }}"></i>  <span
-                                class=" {{ $task->nextRunDate() ? ( ( new DateTime($task->nextRunDate()) < new DateTime('now') ) ? 'text-danger' : 'text-primary' ) : '' }}">{{ $task->nextRunDate() ? strftime('%a %b %d %H:%M', strtotime(  $task->nextRunDate() )  ):  trans('overseer::overseer::messages.not_planned')   }}</span>
+                                class=" {{ $task->nextRunDate() ? ( ( new DateTime($task->nextRunDate()) < new DateTime('now') ) ? 'text-danger' : 'text-primary' ) : '' }}">{{ $task->nextRunDate() ? strftime('%a %b %d %H:%M', strtotime(  $task->nextRunDate() )  ):  trans('overseer::messages.not_planned')   }}</span>
                     </span>
                     </div>
 
