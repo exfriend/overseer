@@ -5,6 +5,7 @@ return [
     'unlock_lc' => 'unlock',
     'not_planned' => 'not planned',
     'tasks' => 'Tasks',
+    'view_all' => 'View all',
 
     'history_heading' => 'View hostory',
 
@@ -20,7 +21,7 @@ return [
     'view_log' => 'view log',
 
     'no_runs' => 'This task has not ran yet',
-    'no_cronjobs' => 'No chedule defined',
+    'no_cronjobs' => 'No schedule defined',
 
     'scheduler' => 'Scheduler',
     'cronjobs' => 'Scheduled cronjobs',
