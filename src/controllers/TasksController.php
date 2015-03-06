@@ -38,18 +38,30 @@ class TasksController extends Controller {
     public function running()
     {
         $data = $this->taskRepo->getRunningTasksInfo();
+
+        foreach ( $data as $k => $t )
+        {
+            unset( $data[ $k ][ 'short_log' ] );
+        }
+
+
         return $data;
     }
 
     public function all()
     {
         $data = $this->taskRepo->getAllTasksInfo();
+
+        foreach ( $data as $k => $t )
+        {
+            unset( $data[ $k ][ 'short_log' ] );
+        }
+
         return $data;
     }
 
     public function single( $id )
     {
-
 
         $data = $this->taskRepo->getTaskInfo( $id );
 
