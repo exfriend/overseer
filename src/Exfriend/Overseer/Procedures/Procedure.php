@@ -50,6 +50,7 @@ abstract class Procedure implements ProcedureInterface {
         catch ( \Exception $e )
         {
             $this->error( 'Unrecognized error: ' . $e->getMessage() );
+            $this->say( $e->getTraceAsString() );
             $this->terminate();
         }
     }
