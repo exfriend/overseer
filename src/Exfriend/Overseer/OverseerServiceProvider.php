@@ -23,12 +23,14 @@ class OverseerServiceProvider extends ServiceProvider {
         $this->registerStopTaskCommand();
         $this->registerCronCommand();
         $this->registerUnlockCommand();
+        $this->registerListCommand();
 
         $this->commands( [
             'task.run',
             'task.stop',
             'task.cron',
             'task.unlock',
+            'task.list',
         ] );
     }
 
@@ -40,6 +42,14 @@ class OverseerServiceProvider extends ServiceProvider {
         } );
     }
 
+
+    private function registerListCommand()
+    {
+        $this->app[ 'task.list' ] = $this->app->share( function ( $app )
+        {
+            return new Commands\ViewTasksCommand();
+        } );
+    }
     private function registerStopTaskCommand()
     {
         $this->app[ 'task.stop' ] = $this->app->share( function ( $app )
