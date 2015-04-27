@@ -4,8 +4,6 @@
 use Exfriend\Overseer\Models\Task;
 use Exfriend\Overseer\TaskManager;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 
 class ViewTasksCommand extends Command {
@@ -21,22 +19,38 @@ class ViewTasksCommand extends Command {
 
     public function fire()
     {
+        $rows = [];
+
         $tasks = Task::all();
 
-        $this->table([1,2,3],[1,2,3]);
+        foreach ( $tasks as $task )
+        {
+            $tm = new TaskManager($task);
+
+            $rows[] = [
+                $task->id,
+                $task->title,
+                $task->is_running ? '<fg=yellow;options=bold>'.$tm->info->getProgress().'%</>' : '<fg=magenta>No</>',
+                $task->last_run ,
+            ];
+        }
+
+
+        $table = $this->getHelper( 'table' );
+        $this->line('');
+        $this->table( array( 'id', 'title', 'running', 'last run' ), $rows );
+        $this->line('');
 
     }
 
     protected function getArguments()
     {
-        return array(
-        );
+        return array();
     }
 
     protected function getOptions()
     {
-        return array(
-        );
+        return array();
     }
 
 }

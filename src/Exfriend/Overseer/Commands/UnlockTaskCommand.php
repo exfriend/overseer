@@ -37,8 +37,12 @@ class UnlockTaskCommand extends Command {
     public function fire()
     {
         $task_id = $this->argument( 'task_id' );
+        $task =  Task::find( $task_id );
 
-        $manager = new TaskManager( Task::find( $task_id ) );
+        $task->is_running = 0;
+        $task->save();
+
+        $manager = new TaskManager($task);
         $manager->unlock();
     }
 
